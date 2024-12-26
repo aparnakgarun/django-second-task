@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ profile.name }}'s Profile</title>
+</head>
+<body>
+    <h1>{{ profile.name }}</h1>
+    <p><strong>Bio:</strong> {{ profile.bio }}</p>
+    <p><strong>Skills:</strong> {{ profile.skills }}</p>
+    <p><strong>Contact:</strong> {{ profile.contact }}</p>
+
+    <h2>Projects</h2>
+    <ul>
+        {% for project in projects %}
+            <li>
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.description }}</p>
+                {% if project.image %}
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}" style="max-width: 200px;">
+                {% endif %}
+                {% if project.link %}
+                    <p><a href="{{ project.link }}">Project Link</a></p>
+                {% endif %}
+                <a href="{% url 'project_update' profile_pk=profile.pk pk=project.pk %}">Edit</a>
+                <a href="{% url 'project_delete' profile_pk=profile.pk pk=project.pk %}">Delete</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'project_create' profile_pk=profile.pk %}">Add new project</a>
+</body>
+</html>
