@@ -1,0 +1,5 @@
+# Ignore IDE config files
+.idea/
+
+# Ignore Django static files
+staticfiles/
